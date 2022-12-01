@@ -15,31 +15,32 @@ def inv_factorial(x):
     return int(inv_sterling_approx(x))
 
 
+ONE_SIXTH = 1/6
+ONE_THIRTIETH = 1/30
+SQRT_PI = math.sqrt(math.pi)
+INV_E = 1/math.e
 def ramanujan_approx(x):
     """ Ramanujan approximation for factorial. 
         TODO:
             - verify algorithm works
-            - should I use 1./30. and 1./6.
-            - should I use constant instead of 1/30 and 1/6, like in the fast inverse square root
     """
 
-    fact = (math.sqrt(math.pi) * (x / math.e) ** x) * (((8 * x + 4) * x + 1) * x + 1/30)**(1/6)
-    return fact
+    return (SQRT_PI * (x * INV_E) ** x) * (((8 * x + 4) * x + 1) * x + ONE_THIRTIETH)**ONE_SIXTH
 
 
+ONE_HALF = 1/2
+INV_SQRT_2PI = 1 / math.sqrt(2*math.pi)
+INV_E = 1/math.e
 def inv_sterling_approx(x):
     """ Rearranged Stirling's approximation.
         https://math.stackexchange.com/questions/430167/is-there-an-inverse-to-stirlings-approximation
         TODO:
             - verify algorithm works
-            - should I use 1./2.
-            - should I use constant instead of 1/2 and math.sqrt(2*math.pi) like in the fast inverse square root
-            - should I calculate 1/math.e so I only need to multiply instead of divide
             - finish reading maths paper and implement their findings instead
     """
 
-    log_ = math.log(x / math.sqrt(2*math.pi))
-    return log_ / (lambertw(1/math.e * log_).real) - 1/2
+    log_ = math.log(x * INV_SQRT_2PI)
+    return log_ / (lambertw(INV_E * log_).real) - ONE_HALF
 
     # to find the lowest factorial base that goes into x, first try rounding the output, then rounding the other way
     # OR just round both ways and take the correct one
