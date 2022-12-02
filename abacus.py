@@ -4,28 +4,8 @@ import math
 from scipy.special import lambertw
 
 
-def factorial(x):
-    DOMAIN_LOWER_BOUND = 3      # find the actual lower bound
-    if x < DOMAIN_LOWER_BOUND:
-        return math.factorial(x)
-    return int(ramanujan_approx(x))
-
-
 def inv_factorial(x):
     return int(inv_sterling_approx(x))
-
-
-ONE_SIXTH = 1/6
-ONE_THIRTIETH = 1/30
-SQRT_PI = math.sqrt(math.pi)
-INV_E = 1/math.e
-def ramanujan_approx(x):
-    """ Ramanujan approximation for factorial. 
-        TODO:
-            - verify algorithm works
-    """
-
-    return (SQRT_PI * (x * INV_E) ** x) * (((8 * x + 4) * x + 1) * x + ONE_THIRTIETH)**ONE_SIXTH
 
 
 ONE_HALF = 1/2
