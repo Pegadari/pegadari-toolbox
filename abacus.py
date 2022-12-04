@@ -3,6 +3,8 @@
 import math
 from scipy.special import lambertw
 
+from timeit import timeit
+
 # ---------- FACTORIAL ---------- #
 def inv_factorial(x):
     return int(inv_sterling_approx(x))
@@ -31,10 +33,24 @@ def inv_sterling_approx(x):
 def super_sqrt(radicand: int) -> float:
     """ Return the super square-root of the argument (reverse of 2nd tetration).
         For an explanation, see https://en.wikipedia.org/wiki/Tetration#Square_super-root.
-        TODO:
-            - test which equation is faster
     """
 
     log_radicand = math.log(radicand)
-    return log_radicand / lambertw(log_radicand).real
-    return math.exp(lambertw(math.log(radicand)).real)
+    return int(log_radicand / lambertw(log_radicand).real)      # if returned value is 1 less than actual value, use round() instead of int()
+
+
+# def main():
+#     repetitions = 1000000
+#     func1 = super_sqrt1
+#     func2 = super_sqrt2
+
+#     one_time = timeit(lambda: func1(16777216), number=repetitions)
+#     two_time = timeit(lambda: func2(16777216), number=repetitions)
+#     print(one_time)
+#     print(two_time)
+#     print(func1(16777216))
+#     print(func2(16777216))
+
+
+# if __name__ == "__main__":
+#     main()
