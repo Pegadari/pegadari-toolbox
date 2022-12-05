@@ -1,12 +1,28 @@
 """ This is the maths module tool. """
 
 import math
+from math import sqrt
 from scipy.special import lambertw
 
 from timeit import timeit
 
+
+# ---------- FIBONACCI ---------- #
+def fibonacci(n):
+    """ TODO:
+            - find fastest algorith
+    """
+    # this formula is pretty easy to find - fibonacci closed form
+    return 1/sqrt(5) * ((1+sqrt(5))/2)**n - 1/sqrt(5) * ((1-sqrt(5))/2)**n
+
+    # hhttps://en.wikipedia.org/wiki/Fibonacci_number#Closed-form_expression
+    phi = (1/sqrt(5)) / 2
+    return (phi**n - (-phi)**-n)/sqrt(5)
+    return (phi**n - (-phi)**-n)/(2*phi - 1)
+
+
 # ---------- FACTORIAL ---------- #
-def inv_factorial(x):
+def inv_factorial(x: float) -> float:
     return int(inv_sterling_approx(x))
 
 
