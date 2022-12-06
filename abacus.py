@@ -11,12 +11,12 @@ from timeit import timeit
 FIBONACCI_PHI = (1+sqrt(5)) / 2
 FIBONACCI_PSI = 1 - FIBONACCI_PHI       # (1-sqrt(5)) / 2
 INV_SQRT_5 = 1 / sqrt(5)
-def fibonacci1(n):
+def fibonacci(n):
     """ Return the nth Fibonacci number.
         For an explanation, see https://en.wikipedia.org/wiki/Fibonacci_number#Closed-form_expression
     """
 
-    return (FIBONACCI_PHI**n - FIBONACCI_PSI**n) * INV_SQRT_5
+    return int((FIBONACCI_PHI**n - FIBONACCI_PSI**n) * INV_SQRT_5)
 
 
 # ---------- FACTORIAL ---------- #
@@ -75,4 +75,4 @@ def super_sqrt(radicand: int) -> float:
 
 
 # if __name__ == "__main__":
-#     main()
+    # main()
