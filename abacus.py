@@ -8,17 +8,15 @@ from timeit import timeit
 
 
 # ---------- FIBONACCI ---------- #
-def fibonacci(n):
-    """ TODO:
-            - find fastest algorith
+FIBONACCI_PHI = (1+sqrt(5)) / 2
+FIBONACCI_PSI = 1 - FIBONACCI_PHI       # (1-sqrt(5)) / 2
+INV_SQRT_5 = 1 / sqrt(5)
+def fibonacci1(n):
+    """ Return the nth Fibonacci number.
+        For an explanation, see https://en.wikipedia.org/wiki/Fibonacci_number#Closed-form_expression
     """
-    # this formula is pretty easy to find - fibonacci closed form
-    return 1/sqrt(5) * ((1+sqrt(5))/2)**n - 1/sqrt(5) * ((1-sqrt(5))/2)**n
 
-    # hhttps://en.wikipedia.org/wiki/Fibonacci_number#Closed-form_expression
-    phi = (1/sqrt(5)) / 2
-    return (phi**n - (-phi)**-n)/sqrt(5)
-    return (phi**n - (-phi)**-n)/(2*phi - 1)
+    return (FIBONACCI_PHI**n - FIBONACCI_PSI**n) * INV_SQRT_5
 
 
 # ---------- FACTORIAL ---------- #
@@ -56,16 +54,24 @@ def super_sqrt(radicand: int) -> float:
 
 
 # def main():
-#     repetitions = 1000000
-#     func1 = super_sqrt1
-#     func2 = super_sqrt2
-
-#     one_time = timeit(lambda: func1(16777216), number=repetitions)
-#     two_time = timeit(lambda: func2(16777216), number=repetitions)
-#     print(one_time)
-#     print(two_time)
-#     print(func1(16777216))
-#     print(func2(16777216))
+#     x = 23
+#     repetitions = 10000000
+#     func1 = fibonacci1
+#     func2 = fibonacci2
+#     func3 = fibonacci3
+#     func4 = fibonacci4
+#     time1 = timeit(lambda: func1(x), number=repetitions)
+#     time2 = timeit(lambda: func2(x), number=repetitions)
+#     time3 = timeit(lambda: func3(x), number=repetitions)
+#     time4 = timeit(lambda: func4(x), number=repetitions)
+#     print(time1)
+#     print(time2)
+#     print(time3)
+#     print(time4)
+#     print(func1(x))
+#     print(func2(x))
+#     print(func3(x))
+#     print(func4(x))
 
 
 # if __name__ == "__main__":
