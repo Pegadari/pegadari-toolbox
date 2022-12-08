@@ -5,28 +5,40 @@ from time import time
 import logging
 
 
-def iter_check(seconds: float, iterator: any, last_check_time, name="") -> float:
-    """ ...
-        eg.
-        last_check_time = 0
-        for i in range(1000):
-            sleep(0.1)
-            last_check_time = iter_check(10, i, last_check_time, name="demo")
+def heartbeat(period: float, last_pulse, iterator: any, name="") -> float:
+    """ Debugs a heartbeart of the iterator using the logging module.
+    
+        Args:
+            period: seconds between pulses
+            last_pulse: UNIX time of last pulse
+            iterator: typically the index of the loop       # maybe change to 'index' instead of 'iterator'
+            name: name to differentiate heartbeats
+            
+        Returns:
+            UNIX time of last pulse
+
+        Usage:
+        >>> last_pulse = 0
+        >>> for i in range(30):
+                sleep(0.5)
+                last_pulse = heartbeat(5, last_pulse, i, name="demo")
+        demo: 0
+        demo: 10
+        demo: 20
     
         TODO:
-            - docstring
             - proper logging
     """
 
-    if time() - last_check_time > seconds:
+    if time() - last_pulse > period:
         print(f"{name}: {iterator}")
         return time()
-    return last_check_time
+    return last_pulse
 
 
 # TESTING
 # from time import sleep
-# last_check_time = 0
-# for i in range(1000):
-#     sleep(0.1)
-#     last_check_time = iter_check(10, i, last_check_time, name="demo")
+# last_pulse = 0
+# for i in range(50):
+#     sleep(0.5)
+#     last_pulse = heartbeat(5, last_pulse, i, "demo")
