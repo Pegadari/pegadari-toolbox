@@ -5,13 +5,13 @@ from time import time
 import logging
 
 
-def heartbeat(period: float, last_pulse, iterator: any, name="") -> float:
+def heartbeat(period: float, last_pulse, index: any, name="") -> float:
     """ Debugs a heartbeart of the iterator using the logging module.
     
         Args:
             period: seconds between pulses
             last_pulse: UNIX time of last pulse
-            iterator: typically the index of the loop       # maybe change to 'index' instead of 'iterator'
+            index: the progress through the loop
             name: name to differentiate heartbeats
             
         Returns:
@@ -31,7 +31,7 @@ def heartbeat(period: float, last_pulse, iterator: any, name="") -> float:
     """
 
     if time() - last_pulse > period:
-        print(f"{name}: {iterator}")
+        print(f"{name}: {index}")
         return time()
     return last_pulse
 
