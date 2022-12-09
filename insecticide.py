@@ -5,6 +5,19 @@ from time import time
 import logging
 
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(levelname)s:%(name)s:%(message)s")
+ch.setFormatter(formatter)
+logger.addHandler(ch)
+
+
+# logging.setLevel(logging.DEBUG)
+
+
+
 def heartbeat(period: float, last_pulse, index: any, name="") -> float:
     """ Debugs a heartbeart of the iterator using the logging module.
     
@@ -25,13 +38,16 @@ def heartbeat(period: float, last_pulse, index: any, name="") -> float:
         demo: 0
         demo: 10
         demo: 20
-    
+
         TODO:
-            - proper logging
+            - tidy code
+            - ammend docstring
     """
 
     if time() - last_pulse > period:
-        print(f"{name}: {index}")
+        # print(f"{name}: {index}")
+        logger.debug(f"{name}:{index}")
+        # logging.debug(f"{name}: {index}")
         return time()
     return last_pulse
 
