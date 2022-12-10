@@ -1,24 +1,21 @@
 """ This is the debugger tool module. """
 
 from time import time
-
 import logging
 
 
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter("%(levelname)s:%(name)s:%(message)s")
-ch.setFormatter(formatter)
-logger.addHandler(ch)
+# create logger with level debug and default formatting
+# verbose naming to avoid namespace collisions
+insecticide_logger = logging.getLogger(__name__)
+insecticide_logger.setLevel(logging.DEBUG)
+insecticide_console_handler = logging.StreamHandler()
+insecticide_console_handler.setLevel(logging.DEBUG)
+insecticide_formatter = logging.Formatter("%(levelname)s:%(name)s:%(message)s")
+insecticide_console_handler.setFormatter(insecticide_formatter)
+insecticide_logger.addHandler(insecticide_console_handler)
 
 
-# logging.setLevel(logging.DEBUG)
-
-
-
-def heartbeat(period: float, last_pulse, index: any, name="") -> float:
+def heartbeat(period: float, last_pulse, index: any, name="heartbeat") -> float:
     """ Debugs a heartbeart of the iterator using the logging module.
     
         Args:
@@ -34,27 +31,13 @@ def heartbeat(period: float, last_pulse, index: any, name="") -> float:
         >>> last_pulse = 0
         >>> for i in range(30):
                 sleep(0.5)
-                last_pulse = heartbeat(5, last_pulse, i, name="demo")
-        demo: 0
-        demo: 10
-        demo: 20
-
-        TODO:
-            - tidy code
-            - ammend docstring
+                last_pulse = heartbeat(5, last_pulse, i, name="heartbeat_demo")
+        DEBUG:insecticide:heartbeat_demo:0
+        DEBUG:insecticide:heartbeat_demo:10
+        DEBUG:insecticide:heartbeat_demo:20
     """
 
     if time() - last_pulse > period:
-        # print(f"{name}: {index}")
-        logger.debug(f"{name}:{index}")
-        # logging.debug(f"{name}: {index}")
+        insecticide_logger.debug(f"{name}:{index}")
         return time()
     return last_pulse
-
-
-# TESTING
-# from time import sleep
-# last_pulse = 0
-# for i in range(50):
-#     sleep(0.5)
-#     last_pulse = heartbeat(5, last_pulse, i, "demo")

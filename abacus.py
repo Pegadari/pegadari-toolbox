@@ -1,4 +1,4 @@
-""" This is the maths module tool. """
+""" This is the maths tool module. """
 
 import math
 from math import sqrt
