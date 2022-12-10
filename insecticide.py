@@ -37,7 +37,9 @@ def heartbeat(period: float, last_pulse, index: any, name="heartbeat") -> float:
         DEBUG:insecticide:heartbeat_demo:20
     """
 
+    # on pulse, log heartbeat and update last pulse time
     if time() - last_pulse > period:
         insecticide_logger.debug(f"{name}:{index}")
         return time()
+    # else change nothing
     return last_pulse
